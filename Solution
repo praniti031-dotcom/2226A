@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+const long long MOD = 676767677;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int n;
+        cin >> n;
+
+        vector<int> a(n);
+
+        long long ans = 0;
+        int lastGreater = -1;
+
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+
+            if (a[i] > 1) {
+                ans += a[i];
+                lastGreater = i;
+            }
+        }
+
+        bool needOneChain = false;
+
+        if (lastGreater == -1) {
+            // all elements are 1
+            needOneChain = true;
+        } else {
+            for (int i = lastGreater + 1; i < n; i++) {
+                if (a[i] == 1) {
+                    needOneChain = true;
+                    break;
+                }
+            }
+        }
+
+        if (needOneChain) ans++;
+
+        cout << (ans % MOD) << '\n';
+    }
+
+    return 0;
+}
